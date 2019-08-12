@@ -1,0 +1,13 @@
+#Podfile
+use_frameworks!
+
+## I use this to share pods between more targets whenever I need it
+def sharedPods
+    pod 'Alamofire', '~> 5.0.0.beta.5'
+end
+
+target 'CarsMap' do
+    sharedPods
+end
+
+
