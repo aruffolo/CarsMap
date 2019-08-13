@@ -41,6 +41,18 @@ class AppCoordinator
   private func goToCarListViewController(carListItems: [CarListItemDataView])
   {
     let viewController = CarsListViewController.initViewController(itemDataView: carListItems)
+    let viewModel = CarsListViewModel(view: viewController)
+    viewController.viewModel = viewModel
+
+    configureCarsListController(viewController)
+
     navController?.pushViewController(viewController, animated: true)
+  }
+
+  private func configureCarsListController(_ viewController: CarsListViewController)
+  {
+    viewController.closeClosure = { [weak self] in
+      self?.navController?.popViewController(animated: true)
+    }
   }
 }

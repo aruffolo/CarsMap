@@ -7,18 +7,28 @@
 //
 
 import UIKit
+import SDWebImage
 
 protocol ReloadTable: class
 {
   func reloadTable()
 }
 
-class CarsListViewController: UIViewController
+protocol CarsListViewProtocol where Self: UIViewController
 {
+  func close()
+}
+
+class CarsListViewController: UIViewController, CarsListViewProtocol
+{
+
   @IBOutlet weak var tableView: UITableView!
+
+  var closeClosure: (() -> Void)?
 
   var itemDataView: [CarListItemDataView] = []
   var dataSource: CarsListDataSource!
+  var viewModel: CarsListViewModelProtocol!
 
   static func initViewController(itemDataView: [CarListItemDataView]) -> CarsListViewController
   {
@@ -27,7 +37,7 @@ class CarsListViewController: UIViewController
       as? CarsListViewController else {
         fatalError("This must be a CarsListViewController")
     }
-    
+
     vc.itemDataView = itemDataView
 
     return vc
@@ -41,6 +51,15 @@ class CarsListViewController: UIViewController
     tableView.dataSource = dataSource
 
     navigationController?.isNavigationBarHidden = false
+
+    setBackButton()
+  }
+
+  private func setBackButton()
+  {
+    let item = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(goBackTapped))
+    navigationItem.hidesBackButton = true
+    navigationItem.leftBarButtonItem = item
   }
 
   override func viewWillAppear(_ animated: Bool)
@@ -49,10 +68,19 @@ class CarsListViewController: UIViewController
     dataSource.itemDataView = itemDataView
   }
 
-  override func viewWillDisappear(_ animated: Bool)
+  @objc private func goBackTapped()
   {
-    super.viewWillDisappear(animated)
-    navigationController?.isNavigationBarHidden = false
+    viewModel.goBackTapped()
+  }
+
+  func close()
+  {
+    closeClosure?()
+  }
+
+  deinit
+  {
+    print("view controller: \(CarsListViewController.self.description())")
   }
 }
 
@@ -95,6 +123,8 @@ class CarsListDataSource: NSObject, UITableViewDataSource
       cell.carmodelNameLabel.text = item.modelName
       cell.carTransmissionLabel.text = item.transmission
       cell.fuelTypeLabel.text = item.fuelType.rawValue
+      cell.carImageView.sd_setImage(with: URL(string: item.imageUrl),
+                                    placeholderImage: UIImage(named: "carPlaceholder"))
     }
 
     return cell

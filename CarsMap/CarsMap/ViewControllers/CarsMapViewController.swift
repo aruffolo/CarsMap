@@ -66,6 +66,7 @@ class CarsMapViewController: UIViewController
   {
     super.viewWillAppear(false)
     viewModel?.viewIsReady()
+    navigationController?.isNavigationBarHidden = true
   }
 
   @IBAction func centerButtonTapped(_ sender: UIButton)
@@ -115,6 +116,8 @@ extension CarsMapViewController: CarsMapViewProtocol
     }
 
     DispatchQueue.main.async {
+      // TODO: I should check each annotation
+      self.mapView.removeAnnotations(self.mapView.annotations)
       self.mapView.addAnnotations(annotations)
     }
   }
