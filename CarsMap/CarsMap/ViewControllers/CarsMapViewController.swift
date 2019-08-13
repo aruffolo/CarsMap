@@ -12,6 +12,7 @@ import MapKit
 protocol CarsMapViewProtocol where Self: UIViewController
 {
   func zoomToLocation(coordinate: (lat: Double, lng: Double))
+  func addPoisToMap(carsViewData: [CarLocationViewData])
 }
 
 class CarsMapViewController: UIViewController
@@ -24,6 +25,7 @@ class CarsMapViewController: UIViewController
   {
     super.viewDidLoad()
     setStyle()
+    setMapSettings()
   }
 
   private func setStyle()
@@ -32,26 +34,25 @@ class CarsMapViewController: UIViewController
     mapView.showsUserLocation = true
   }
 
+  private func setMapSettings()
+  {
+    mapView.register(CarAnnotationView.self,
+                     forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+
+    mapView.register(CarClusterAnnotationView.self,
+                     forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
+  }
+
   override func viewWillAppear(_ animated: Bool)
   {
     super.viewWillAppear(false)
     viewModel?.viewIsReady()
-
-    let client = RestClient()
-    client.getCarsList(completion: { result in
-      switch result
-      {
-      case .success(let list):
-        print("list \(list)")
-      case .failure(let error):
-        print("error \(error)")
-      }
-    })
   }
 }
 
 extension CarsMapViewController: CarsMapViewProtocol
 {
+
   func zoomToLocation(coordinate: (lat: Double, lng: Double))
   {
     let coor = CLLocationCoordinate2D(latitude: coordinate.lat, longitude: coordinate.lng)
@@ -66,5 +67,14 @@ extension CarsMapViewController: CarsMapViewProtocol
                                               latitudinalMeters: regionRadius,
                                               longitudinalMeters: regionRadius)
     mapView.setRegion(coordinateRegion, animated: true)
+  }
+
+  func addPoisToMap(carsViewData: [CarLocationViewData])
+  {
+    let annotations = carsViewData.map { (data: CarLocationViewData) -> CarMapAnnotation in
+      let annotation = CarMapAnnotation(coordinate: CLLocationCoordinate2D(latitude: data.lat, longitude: data.lng))
+      return annotation
+    }
+    mapView.addAnnotations(annotations)
   }
 }

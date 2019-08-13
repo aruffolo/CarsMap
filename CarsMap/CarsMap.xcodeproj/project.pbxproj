@@ -25,6 +25,8 @@
 		0EC4CE992302C08B008BEA7D /* CarLocationViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4CE982302C08B008BEA7D /* CarLocationViewData.swift */; };
 		0EC4CE9C2302F70C008BEA7D /* CarMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4CE9B2302F70C008BEA7D /* CarMapAnnotation.swift */; };
 		0EC4CE9F2302FB59008BEA7D /* CarsListFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4CE9E2302FB59008BEA7D /* CarsListFetcher.swift */; };
+		0EC4CEA123030804008BEA7D /* CarAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4CEA023030804008BEA7D /* CarAnnotationView.swift */; };
+		0EC4CEA323030EB0008BEA7D /* CarClusterAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4CEA223030EB0008BEA7D /* CarClusterAnnotationView.swift */; };
 		43886F398152D1044845E958 /* Pods_CarsMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601865AC2F5A3EC4F4F670D2 /* Pods_CarsMap.framework */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +72,8 @@
 		0EC4CE982302C08B008BEA7D /* CarLocationViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarLocationViewData.swift; sourceTree = "<group>"; };
 		0EC4CE9B2302F70C008BEA7D /* CarMapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMapAnnotation.swift; sourceTree = "<group>"; };
 		0EC4CE9E2302FB59008BEA7D /* CarsListFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsListFetcher.swift; sourceTree = "<group>"; };
+		0EC4CEA023030804008BEA7D /* CarAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarAnnotationView.swift; sourceTree = "<group>"; };
+		0EC4CEA223030EB0008BEA7D /* CarClusterAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarClusterAnnotationView.swift; sourceTree = "<group>"; };
 		236455B51CFE2838AD890777 /* Pods-CarsMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CarsMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CarsMap/Pods-CarsMap.debug.xcconfig"; sourceTree = "<group>"; };
 		4A535FEFD5AD1E23FD23849C /* Pods-CarsMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CarsMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-CarsMap/Pods-CarsMap.release.xcconfig"; sourceTree = "<group>"; };
 		601865AC2F5A3EC4F4F670D2 /* Pods_CarsMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CarsMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -217,6 +221,8 @@
 			children = (
 				0EC4CE852302AEE6008BEA7D /* CarsLocationManager.swift */,
 				0EC4CE9B2302F70C008BEA7D /* CarMapAnnotation.swift */,
+				0EC4CEA023030804008BEA7D /* CarAnnotationView.swift */,
+				0EC4CEA223030EB0008BEA7D /* CarClusterAnnotationView.swift */,
 			);
 			path = MapKitClasses;
 			sourceTree = "<group>";
@@ -433,9 +439,11 @@
 				0EC4CE902302B865008BEA7D /* RestClient.swift in Sources */,
 				0EC4CE992302C08B008BEA7D /* CarLocationViewData.swift in Sources */,
 				0EC4CE7F23029E54008BEA7D /* CarsMapViewController.swift in Sources */,
+				0EC4CEA323030EB0008BEA7D /* CarClusterAnnotationView.swift in Sources */,
 				0EC4CE862302AEE6008BEA7D /* CarsLocationManager.swift in Sources */,
 				0EC4CE882302B188008BEA7D /* AppCoordinator.swift in Sources */,
 				0EC4CE512301CA8C008BEA7D /* AppDelegate.swift in Sources */,
+				0EC4CEA123030804008BEA7D /* CarAnnotationView.swift in Sources */,
 				0EC4CE952302B933008BEA7D /* CarsListResponse.swift in Sources */,
 				0EC4CE8C2302B845008BEA7D /* RestRouter.swift in Sources */,
 				0EC4CE832302A12F008BEA7D /* CarsMapViewModel.swift in Sources */,

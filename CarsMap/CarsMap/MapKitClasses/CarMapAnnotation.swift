@@ -11,9 +11,11 @@ import MapKit
 final class CarMapAnnotation: NSObject, MKAnnotation
 {
   let coordinate: CLLocationCoordinate2D
+  let imageName: String
 
   init(coordinate: CLLocationCoordinate2D)
   {
     self.coordinate = coordinate
+    imageName = "carIcon"
   }
 }

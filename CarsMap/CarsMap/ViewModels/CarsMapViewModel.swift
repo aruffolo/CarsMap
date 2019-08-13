@@ -37,14 +37,15 @@ class CarsMapViewModel: CarsMapViewModelProtocol
   func viewIsReady()
   {
     locationManager.requestAutorization()
-    locationManager.requestLocation()
+    //locationManager.requestLocation()
 
     carsFetcher.getCarsList(completion: { result in
       switch result
       {
       case .success(let list):
-        // TODO
-        break
+        self.view?.addPoisToMap(carsViewData: list)
+        let coordinate = (lat: list.first!.lat, lng: list.first!.lng)
+        self.view?.zoomToLocation(coordinate: coordinate)
       case .failure(let error):
         // TODO: set errors to show
         break
