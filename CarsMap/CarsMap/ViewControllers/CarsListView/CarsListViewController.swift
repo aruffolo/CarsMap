@@ -17,6 +17,7 @@ protocol ReloadTable: class
 protocol CarsListViewProtocol where Self: UIViewController
 {
   func close()
+  func elementHasBeenTappedAt(index: Int)
 }
 
 class CarsListViewController: UIViewController, CarsListViewProtocol
@@ -25,9 +26,11 @@ class CarsListViewController: UIViewController, CarsListViewProtocol
   @IBOutlet weak var tableView: UITableView!
 
   var closeClosure: (() -> Void)?
+  var didTapIndexClosure: ((_ index: Int) -> Void)?
 
   var itemDataView: [CarListItemDataView] = []
   var dataSource: CarsListDataSource!
+  var tableDelegate: CarListDelegate!
   var viewModel: CarsListViewModelProtocol!
 
   static func initViewController(itemDataView: [CarListItemDataView]) -> CarsListViewController
@@ -47,12 +50,23 @@ class CarsListViewController: UIViewController, CarsListViewProtocol
   {
     super.viewDidLoad()
 
-    dataSource = CarsListDataSource(reloadTable: self)
-    tableView.dataSource = dataSource
-
+    setTableDelegateAndSource()
     navigationController?.isNavigationBarHidden = false
 
     setBackButton()
+  }
+
+  private func setTableDelegateAndSource()
+  {
+    dataSource = CarsListDataSource(reloadTable: self)
+    tableView.dataSource = dataSource
+
+    tableDelegate = CarListDelegate()
+    tableDelegate.didTapIndexClosure = { [weak self] index in
+      self?.viewModel.didTapElementAt(index: index)
+    }
+
+    tableView.delegate = tableDelegate
   }
 
   private func setBackButton()
@@ -78,9 +92,14 @@ class CarsListViewController: UIViewController, CarsListViewProtocol
     closeClosure?()
   }
 
+  func elementHasBeenTappedAt(index: Int)
+  {
+    self.didTapIndexClosure?(index)
+  }
+
   deinit
   {
-    print("view controller: \(CarsListViewController.self.description())")
+    print("view controller: \(CarsListViewController.self.description()) deinit called")
   }
 }
 
@@ -128,5 +147,15 @@ class CarsListDataSource: NSObject, UITableViewDataSource
     }
 
     return cell
+  }
+}
+
+class CarListDelegate: NSObject, UITableViewDelegate
+{
+  var didTapIndexClosure: ((_ index: Int) -> Void)?
+
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
+  {
+    didTapIndexClosure?(indexPath.row)
   }
 }

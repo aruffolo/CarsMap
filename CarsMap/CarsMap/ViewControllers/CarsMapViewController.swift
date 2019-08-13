@@ -69,6 +69,11 @@ class CarsMapViewController: UIViewController
     navigationController?.isNavigationBarHidden = true
   }
 
+  func elementHasBeenTappedAt(index: Int)
+  {
+    self.viewModel?.zoomToCarLocationView(indexOfCardListItem: index)
+  }
+
   @IBAction func centerButtonTapped(_ sender: UIButton)
   {
     viewModel?.ceterButtonTapped()
@@ -116,7 +121,6 @@ extension CarsMapViewController: CarsMapViewProtocol
     }
 
     DispatchQueue.main.async {
-      // TODO: I should check each annotation
       self.mapView.removeAnnotations(self.mapView.annotations)
       self.mapView.addAnnotations(annotations)
     }

@@ -11,6 +11,7 @@ import Foundation
 protocol CarsListViewModelProtocol
 {
   func goBackTapped()
+  func didTapElementAt(index: Int)
 }
 
 class CarsListViewModel: CarsListViewModelProtocol
@@ -25,5 +26,10 @@ class CarsListViewModel: CarsListViewModelProtocol
   func goBackTapped()
   {
     view?.close()
+  }
+
+  func didTapElementAt(index: Int)
+  {
+    view?.elementHasBeenTappedAt(index: index)
   }
 }

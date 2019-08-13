@@ -60,12 +60,15 @@ struct CarsListFetcher: CarsListFetcherProtocol
 
   private func createViewData(carList: CarsList) -> [CarLocationViewData]
   {
-    return carList.map {
-      guard let lat = $0.latitude, let lng = $0.longitude, let name = $0.modelName else {
+    let dataList = carList.map { (element: CarsListElement) -> CarLocationViewData in
+      guard let lat = element.latitude, let lng = element.longitude, let name = element.modelName,
+        let dataId = element.carId else {
         fatalError("Items here should already be filtered")
       }
-      return CarLocationViewData(lat: lat, lng: lng, name: name)
+      return CarLocationViewData(lat: lat, lng: lng, name: name, dataId: dataId)
     }
+
+    return removeDuplicateKeys(carList: dataList)
   }
 
   func getCarsListData(completion: @escaping (_ result: Result<[CarListItemDataView], CarsFetcherError>) -> Void)
@@ -100,22 +103,24 @@ struct CarsListFetcher: CarsListFetcherProtocol
 
   private func createViewDataForItemList(carList: CarsList) -> [CarListItemDataView]
   {
-    return carList.map { (carItem: CarsListElement) -> CarListItemDataView in
+    let carDataList = carList.map { (carItem: CarsListElement) -> CarListItemDataView in
       guard let modelName = carItem.modelName, let fuelType = carItem.fuelType,
-        let transmission = carItem.transmission?.rawValue,
+        let transmission = carItem.transmission?.rawValue, let dataId = carItem.carId,
         let imgUrl = carItem.carImageURL else {
         fatalError("Items here should already be filtered")
       }
 
-      let fuelTypeViewData = createFuleDescription(fuelType: fuelType)
+      let fuelTypeViewData = createFuelDescription(fuelType: fuelType)
       return CarListItemDataView(imageUrl: imgUrl,
                                  modelName: modelName,
                                  transmission: transmission,
-                                 fuelType: fuelTypeViewData)
+                                 fuelType: fuelTypeViewData, dataId: dataId)
     }
+
+    return removeDuplicateKeys(carList: carDataList)
   }
 
-  private func createFuleDescription(fuelType: FuelType) -> FuelTypeViewData
+  private func createFuelDescription(fuelType: FuelType) -> FuelTypeViewData
   {
     switch fuelType
     {
@@ -128,4 +133,10 @@ struct CarsListFetcher: CarsListFetcherProtocol
     }
   }
 
+  private func removeDuplicateKeys<Element: DataId>(carList: [Element]) -> [Element] {
+    var addedDict = [String: Bool]()
+    return carList.filter {
+      addedDict.updateValue(true, forKey: $0.dataId) == nil
+    }
+  }
 }

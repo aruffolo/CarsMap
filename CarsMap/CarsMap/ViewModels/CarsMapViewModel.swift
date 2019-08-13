@@ -19,6 +19,7 @@ protocol CarsMapViewModelProtocol
   func viewIsReady()
   func ceterButtonTapped()
   func goToListTapped()
+  func zoomToCarLocationView(indexOfCardListItem: Int)
 }
 
 class CarsMapViewModel: CarsMapViewModelProtocol
@@ -26,6 +27,9 @@ class CarsMapViewModel: CarsMapViewModelProtocol
   weak var view: CarsMapViewProtocol?
   let locationManager: CarsLocationManagerProtocol
   let carsFetcher: CarsListFetcherProtocol
+
+  var carsLocationViewData: [CarLocationViewData]?
+  var carsListViewData: [CarListItemDataView]?
 
   init(view: CarsMapViewProtocol?,
        locationManager: CarsLocationManagerProtocol,
@@ -44,6 +48,7 @@ class CarsMapViewModel: CarsMapViewModelProtocol
       switch result
       {
       case .success(let list):
+        self.carsLocationViewData = list
         self.view?.addPoisToMap(carsViewData: list)
         let coordinate = (lat: list.first!.lat, lng: list.first!.lng)
         self.view?.zoomToLocation(coordinate: coordinate)
@@ -65,12 +70,25 @@ class CarsMapViewModel: CarsMapViewModelProtocol
       switch result
       {
       case .success(let list):
+        self.carsListViewData = list
         self.view?.goTolist(carsItemData: list)
       case .failure(let error):
         // TODO: set errors to show
         break
       }
     })
+  }
+
+  func zoomToCarLocationView(indexOfCardListItem: Int)
+  {
+    let index = carsLocationViewData?.firstIndex(where: {
+      $0.dataId == self.carsListViewData?[indexOfCardListItem].dataId
+    })
+
+    if let indexFound = index, let data = carsLocationViewData?[indexFound]
+    {
+      self.view?.zoomToLocation(coordinate: (lat: data.lat, lng: data.lng))
+    }
   }
 }
 

@@ -51,6 +51,11 @@ class AppCoordinator
 
   private func configureCarsListController(_ viewController: CarsListViewController)
   {
+    viewController.didTapIndexClosure = { [weak self] index in
+      self?.navController?.popViewController(animated: true)
+      self?.mapController?.elementHasBeenTappedAt(index: index)
+    }
+
     viewController.closeClosure = { [weak self] in
       self?.navController?.popViewController(animated: true)
     }

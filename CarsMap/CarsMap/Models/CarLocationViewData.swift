@@ -8,10 +8,17 @@
 
 import Foundation
 
-struct CarLocationViewData
+protocol DataId
+{
+  var dataId: String { get }
+}
+
+struct CarLocationViewData: DataId
 {
   let lat: Double
   let lng: Double
 
   let name: String
+
+  var dataId: String
 }

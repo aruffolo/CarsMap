@@ -14,10 +14,12 @@ enum FuelTypeViewData: String {
   case electrical = "Electrical"
 }
 
-struct CarListItemDataView
+struct CarListItemDataView: DataId
 {
   let imageUrl: String
   let modelName: String
   let transmission: String
   let fuelType: FuelTypeViewData
+
+  var dataId: String
 }
