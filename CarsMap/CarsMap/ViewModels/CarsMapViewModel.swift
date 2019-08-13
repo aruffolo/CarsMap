@@ -82,9 +82,13 @@ class CarsMapViewModel: CarsMapViewModelProtocol
     switch error
     {
     case .serviceUnavailable:
-      view?.showError(title: AppStrings.error.value, message: AppStrings.serviceUnavailable.value, buttonLabel: AppStrings.close.value)
+      view?.showError(title: AppStrings.error.value,
+                      message: AppStrings.serviceUnavailable.value,
+                      buttonLabel: AppStrings.close.value)
     case .emptyList:
-      view?.showError(title: AppStrings.error.value, message: AppStrings.dataNotFound.value, buttonLabel: AppStrings.close.value)
+      view?.showError(title: AppStrings.error.value,
+                      message: AppStrings.dataNotFound.value,
+                      buttonLabel: AppStrings.close.value)
     }
   }
 
