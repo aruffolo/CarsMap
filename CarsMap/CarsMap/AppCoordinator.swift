@@ -24,8 +24,12 @@ class AppCoordinator
 
   private func configureController()
   {
+    let restClient = RestClient()
+    let carsFetcher = CarsListFetcher(restClient: restClient)
     let locatioManager = CarsLocationManager()
-    let mapViewModel = CarsMapViewModel(view: mapController, locationManager: locatioManager)
+    let mapViewModel = CarsMapViewModel(view: mapController,
+                                        locationManager: locatioManager,
+                                        carsFetcher: carsFetcher)
     locatioManager.delegate = mapViewModel
     self.mapController?.viewModel = mapViewModel
   }

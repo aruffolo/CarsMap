@@ -9,9 +9,15 @@
 import Foundation
 import Alamofire
 
-class RestClient
+protocol RestClientProtocol
 {
-  func getCarsList(completion: @escaping (_ result: AFResult<CarsList>) -> Void) {
+  func getCarsList(completion: @escaping (_ result: AFResult<CarsList>) -> Void)
+}
+
+class RestClient: RestClientProtocol
+{
+  func getCarsList(completion: @escaping (_ result: AFResult<CarsList>) -> Void)
+  {
     request(RestRouter.cars, completion: completion)
   }
 

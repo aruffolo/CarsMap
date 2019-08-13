@@ -10,7 +10,7 @@ import Foundation
 
 struct CarsListElement: Codable
 {
-  let id, modelIdentifier, modelName, name: String?
+  let carId, modelIdentifier, modelName, name: String?
   let make, group: String?
   let color, series: String?
   let fuelType: FuelType?
@@ -23,17 +23,18 @@ struct CarsListElement: Codable
 
   enum CodingKeys: String, CodingKey
   {
-    case id, modelIdentifier, modelName, name, make, group, color, series, fuelType, fuelLevel, transmission,
+    case modelIdentifier, modelName, name, make, group, color, series, fuelType, fuelLevel, transmission,
     licensePlate, latitude, longitude, innerCleanliness
     case carImageURL = "carImageUrl"
+    case carId = "id"
   }
 }
 
 enum FuelType: String, Codable
 {
-  case d = "D"
-  case e = "E"
-  case p = "P"
+  case diesel = "D"
+  case electrical = "E"
+  case petrol = "P"
 }
 
 enum InnerCleanliness: String, Codable
@@ -45,8 +46,8 @@ enum InnerCleanliness: String, Codable
 
 enum Transmission: String, Codable
 {
-  case a = "A"
-  case m = "M"
+  case automatic = "A"
+  case manual = "M"
 }
 
 typealias CarsList = [CarsListElement]

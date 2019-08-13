@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol LocationManagerDelegate where Self: AnyObject
+protocol LocationManagerDelegate: class
 {
   func didUpdateLocation(coordinate: (lat: Double, lng: Double))
   func didFail()
@@ -23,17 +23,33 @@ class CarsMapViewModel: CarsMapViewModelProtocol
 {
   weak var view: CarsMapViewProtocol?
   let locationManager: CarsLocationManagerProtocol
+  let carsFetcher: CarsListFetcherProtocol
 
-  init(view: CarsMapViewProtocol?, locationManager: CarsLocationManagerProtocol)
+  init(view: CarsMapViewProtocol?,
+       locationManager: CarsLocationManagerProtocol,
+       carsFetcher: CarsListFetcherProtocol)
   {
     self.view = view
     self.locationManager = locationManager
+    self.carsFetcher = carsFetcher
   }
 
   func viewIsReady()
   {
     locationManager.requestAutorization()
     locationManager.requestLocation()
+
+    carsFetcher.getCarsList(completion: { result in
+      switch result
+      {
+      case .success(let list):
+        // TODO
+        break
+      case .failure(let error):
+        // TODO: set errors to show
+        break
+      }
+    })
   }
 }
 
