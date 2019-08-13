@@ -16,7 +16,8 @@ enum CarsFetcherError: Error
 
 protocol CarsListFetcherProtocol
 {
-  func getCarsList(completion: @escaping (_ result: Result<[CarLocationViewData], CarsFetcherError>) -> Void)
+  func getCarsLocationData(completion: @escaping (_ result: Result<[CarLocationViewData], CarsFetcherError>) -> Void)
+  func getCarsListData(completion: @escaping (_ result: Result<[CarListItemDataView], CarsFetcherError>) -> Void)
 }
 
 struct CarsListFetcher: CarsListFetcherProtocol
@@ -28,7 +29,7 @@ struct CarsListFetcher: CarsListFetcherProtocol
     self.restClient = restClient
   }
 
-  func getCarsList(completion: @escaping (_ result: Result<[CarLocationViewData], CarsFetcherError>) -> Void)
+  func getCarsLocationData(completion: @escaping (_ result: Result<[CarLocationViewData], CarsFetcherError>) -> Void)
   {
     restClient.getCarsList(completion: { result in
       switch result
@@ -66,4 +67,65 @@ struct CarsListFetcher: CarsListFetcherProtocol
       return CarLocationViewData(lat: lat, lng: lng, name: name)
     }
   }
+
+  func getCarsListData(completion: @escaping (_ result: Result<[CarListItemDataView], CarsFetcherError>) -> Void)
+  {
+    restClient.getCarsList(completion: { result in
+      switch result
+      {
+      case .success(let response):
+        let result = self.handleResponseForListViewData(response: response)
+        completion(result)
+      case .failure:
+        completion(.failure(.emptyList))
+      }
+    })
+  }
+
+  private func handleResponseForListViewData(response: CarsList) -> Result<[CarListItemDataView], CarsFetcherError>
+  {
+    let filtered = response.filter(self.validateResponseItemForListItem)
+    if filtered.isEmpty
+    {
+      return .failure(.emptyList)
+    }
+    return .success(self.createViewDataForItemList(carList: filtered))
+  }
+
+  private func validateResponseItemForListItem(carItem: CarsListElement) -> Bool
+  {
+    return carItem.modelName != nil && carItem.fuelType != nil && carItem.transmission != nil
+      && carItem.carImageURL != nil
+  }
+
+  private func createViewDataForItemList(carList: CarsList) -> [CarListItemDataView]
+  {
+    return carList.map { (carItem: CarsListElement) -> CarListItemDataView in
+      guard let modelName = carItem.modelName, let fuelType = carItem.fuelType,
+        let transmission = carItem.transmission?.rawValue,
+        let imgUrl = carItem.carImageURL else {
+        fatalError("Items here should already be filtered")
+      }
+
+      let fuelTypeViewData = createFuleDescription(fuelType: fuelType)
+      return CarListItemDataView(imageUrl: imgUrl,
+                                 modelName: modelName,
+                                 transmission: transmission,
+                                 fuelType: fuelTypeViewData)
+    }
+  }
+
+  private func createFuleDescription(fuelType: FuelType) -> FuelTypeViewData
+  {
+    switch fuelType
+    {
+    case .diesel:
+      return .diesel
+    case .electrical:
+      return .electrical
+    case .petrol:
+      return .gasoline
+    }
+  }
+
 }

@@ -18,6 +18,7 @@ protocol CarsMapViewModelProtocol
 {
   func viewIsReady()
   func ceterButtonTapped()
+  func goToListTapped()
 }
 
 class CarsMapViewModel: CarsMapViewModelProtocol
@@ -38,9 +39,8 @@ class CarsMapViewModel: CarsMapViewModelProtocol
   func viewIsReady()
   {
     locationManager.requestAutorization()
-    //locationManager.requestLocation()
 
-    carsFetcher.getCarsList(completion: { result in
+    carsFetcher.getCarsLocationData(completion: { result in
       switch result
       {
       case .success(let list):
@@ -57,6 +57,20 @@ class CarsMapViewModel: CarsMapViewModelProtocol
   func ceterButtonTapped()
   {
     locationManager.requestLocation()
+  }
+
+  func goToListTapped()
+  {
+    carsFetcher.getCarsListData(completion: { result in
+      switch result
+      {
+      case .success(let list):
+        self.view?.goTolist(carsItemData: list)
+      case .failure(let error):
+        // TODO: set errors to show
+        break
+      }
+    })
   }
 }
 

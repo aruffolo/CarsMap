@@ -32,5 +32,15 @@ class AppCoordinator
                                         carsFetcher: carsFetcher)
     locatioManager.delegate = mapViewModel
     self.mapController?.viewModel = mapViewModel
+
+    self.mapController?.goToListClosure = { [weak self] dataList in
+      self?.goToCarListViewController(carListItems: dataList)
+    }
+  }
+
+  private func goToCarListViewController(carListItems: [CarListItemDataView])
+  {
+    let viewController = CarsListViewController.initViewController(itemDataView: carListItems)
+    navController?.pushViewController(viewController, animated: true)
   }
 }

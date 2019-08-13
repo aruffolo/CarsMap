@@ -13,12 +13,16 @@ protocol CarsMapViewProtocol where Self: UIViewController
 {
   func zoomToLocation(coordinate: (lat: Double, lng: Double))
   func addPoisToMap(carsViewData: [CarLocationViewData])
+  func goTolist(carsItemData: [CarListItemDataView])
 }
 
 class CarsMapViewController: UIViewController
 {
   @IBOutlet weak var centerButton: UIButton!
   @IBOutlet weak var mapView: MKMapView!
+  @IBOutlet weak var carsListButton: UIButton!
+
+  var goToListClosure: ((_ carsItemData: [CarListItemDataView]) -> Void)?
 
   var viewModel: CarsMapViewModelProtocol?
 
@@ -36,6 +40,9 @@ class CarsMapViewController: UIViewController
 
     centerButton.layer.cornerRadius = centerButton.frame.width / 2
     setShadow(layer: centerButton.layer)
+
+    carsListButton.layer.cornerRadius = 5
+    setShadow(layer: carsListButton.layer)
   }
 
   private func setShadow(layer: CALayer)
@@ -65,11 +72,25 @@ class CarsMapViewController: UIViewController
   {
     viewModel?.ceterButtonTapped()
   }
+
+  @IBAction func carsListButtonTapped(_ sender: UIButton)
+  {
+    viewModel?.goToListTapped()
+  }
+
+  func goToListTapped()
+  {
+    viewModel?.goToListTapped()
+  }
+
+  func goTolist(carsItemData: [CarListItemDataView])
+  {
+    goToListClosure?(carsItemData)
+  }
 }
 
 extension CarsMapViewController: CarsMapViewProtocol
 {
-
   func zoomToLocation(coordinate: (lat: Double, lng: Double))
   {
     let coor = CLLocationCoordinate2D(latitude: coordinate.lat, longitude: coordinate.lng)
@@ -92,6 +113,9 @@ extension CarsMapViewController: CarsMapViewProtocol
       let annotation = CarMapAnnotation(coordinate: CLLocationCoordinate2D(latitude: data.lat, longitude: data.lng))
       return annotation
     }
-    mapView.addAnnotations(annotations)
+
+    DispatchQueue.main.async {
+      self.mapView.addAnnotations(annotations)
+    }
   }
 }

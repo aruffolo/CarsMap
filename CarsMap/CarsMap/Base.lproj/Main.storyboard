@@ -32,20 +32,34 @@
                                     <action selector="centerButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LgQ-wP-dcY"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQE-fs-iAq">
+                                <rect key="frame" x="20" y="814" width="84" height="28"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
+                                <state key="normal" title="CARS LIST">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="carsListButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gKv-s6-lEJ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Aeu-Xe-EeV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="3LV-Fv-dAZ"/>
+                            <constraint firstItem="nQE-fs-iAq" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="CM2-oz-04C"/>
                             <constraint firstAttribute="trailing" secondItem="Aeu-Xe-EeV" secondAttribute="trailing" id="VmC-MV-dwl"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="XaB-uC-H75" secondAttribute="bottom" constant="10" id="eQx-7j-WLK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XaB-uC-H75" secondAttribute="trailing" constant="10" id="esO-i3-wvW"/>
                             <constraint firstItem="Aeu-Xe-EeV" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="hPG-MV-PcT"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="nQE-fs-iAq" secondAttribute="bottom" constant="20" id="pcE-49-yof"/>
                             <constraint firstAttribute="bottom" secondItem="Aeu-Xe-EeV" secondAttribute="bottom" id="vCr-va-C7J"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="3rH-K4-fqx"/>
                     <connections>
+                        <outlet property="carsListButton" destination="nQE-fs-iAq" id="J6X-tc-lg6"/>
                         <outlet property="centerButton" destination="XaB-uC-H75" id="OMy-mz-Mqu"/>
                         <outlet property="mapView" destination="Aeu-Xe-EeV" id="aIW-k7-kQh"/>
                     </connections>
@@ -53,6 +67,107 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="561" y="6"/>
+        </scene>
+        <!--Cars List View Controller-->
+        <scene sceneID="5Jy-Uc-pQY">
+            <objects>
+                <viewController storyboardIdentifier="CarsListViewController" id="siW-WH-BeP" customClass="CarsListViewController" customModule="CarsMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PuN-5F-Erz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="07P-ND-2d3">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CarsListTableViewCell" rowHeight="170" id="sZG-b6-z9z" customClass="CarsListTableViewCell" customModule="CarsMap" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="170"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sZG-b6-z9z" id="QX2-k6-sri">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="169.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="carPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="MdR-bS-NoL">
+                                                    <rect key="frame" x="244" y="10" width="150" height="150"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="150" id="Le5-xh-gzS"/>
+                                                        <constraint firstAttribute="height" constant="150" id="oBh-Fs-UYw"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transmission:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J3j-wI-icI">
+                                                    <rect key="frame" x="20" y="108" width="114.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Automatic" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ffu-Q3-9rf">
+                                                    <rect key="frame" x="20" y="139" width="78" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Diesel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMz-eb-uhv">
+                                                    <rect key="frame" x="20" y="77" width="47" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fuel:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tqW-jM-RI1">
+                                                    <rect key="frame" x="20" y="46" width="40.5" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FIAT 500" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hNe-Au-YN1">
+                                                    <rect key="frame" x="20" y="10" width="77" height="21"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="J3j-wI-icI" firstAttribute="leading" secondItem="QX2-k6-sri" secondAttribute="leading" constant="20" id="08Y-Rz-kAP"/>
+                                                <constraint firstItem="Ffu-Q3-9rf" firstAttribute="bottom" secondItem="MdR-bS-NoL" secondAttribute="bottom" id="0IV-z7-3AM"/>
+                                                <constraint firstItem="J3j-wI-icI" firstAttribute="top" secondItem="bMz-eb-uhv" secondAttribute="bottom" constant="10" id="8Iv-TY-lrx"/>
+                                                <constraint firstItem="hNe-Au-YN1" firstAttribute="top" secondItem="MdR-bS-NoL" secondAttribute="top" id="8zR-AT-IYH"/>
+                                                <constraint firstItem="Ffu-Q3-9rf" firstAttribute="top" secondItem="J3j-wI-icI" secondAttribute="bottom" constant="10" id="C7y-XX-DqF"/>
+                                                <constraint firstItem="Ffu-Q3-9rf" firstAttribute="leading" secondItem="QX2-k6-sri" secondAttribute="leading" constant="20" id="HJZ-2P-Pn7"/>
+                                                <constraint firstItem="bMz-eb-uhv" firstAttribute="leading" secondItem="QX2-k6-sri" secondAttribute="leading" constant="20" id="OSS-8z-cWH"/>
+                                                <constraint firstItem="MdR-bS-NoL" firstAttribute="top" secondItem="QX2-k6-sri" secondAttribute="top" constant="10" id="bxU-q4-n3M"/>
+                                                <constraint firstItem="bMz-eb-uhv" firstAttribute="top" secondItem="tqW-jM-RI1" secondAttribute="bottom" constant="10" id="l1f-C3-a1A"/>
+                                                <constraint firstAttribute="trailing" secondItem="MdR-bS-NoL" secondAttribute="trailing" constant="20" id="p7g-1C-kMx"/>
+                                                <constraint firstItem="hNe-Au-YN1" firstAttribute="leading" secondItem="QX2-k6-sri" secondAttribute="leading" constant="20" id="vw3-ne-RNy"/>
+                                                <constraint firstAttribute="bottom" secondItem="MdR-bS-NoL" secondAttribute="bottom" constant="9.5" id="wE4-gw-ExK"/>
+                                                <constraint firstItem="tqW-jM-RI1" firstAttribute="leading" secondItem="QX2-k6-sri" secondAttribute="leading" constant="20" id="yQ1-Rl-G84"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="carImageView" destination="MdR-bS-NoL" id="ICV-ET-Nrb"/>
+                                            <outlet property="carTransmissionLabel" destination="Ffu-Q3-9rf" id="f4s-NZ-Gnr"/>
+                                            <outlet property="carmodelNameLabel" destination="hNe-Au-YN1" id="YKj-Cg-efd"/>
+                                            <outlet property="fuelTypeLabel" destination="bMz-eb-uhv" id="qF3-Hh-Jap"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="cCj-aY-qQK" firstAttribute="bottom" secondItem="07P-ND-2d3" secondAttribute="bottom" id="1QM-uB-hRa"/>
+                            <constraint firstItem="07P-ND-2d3" firstAttribute="top" secondItem="cCj-aY-qQK" secondAttribute="top" id="486-Xg-Kf5"/>
+                            <constraint firstItem="07P-ND-2d3" firstAttribute="leading" secondItem="cCj-aY-qQK" secondAttribute="leading" id="60I-zb-jbF"/>
+                            <constraint firstItem="cCj-aY-qQK" firstAttribute="trailing" secondItem="07P-ND-2d3" secondAttribute="trailing" id="G2H-gZ-BOA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="cCj-aY-qQK"/>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="07P-ND-2d3" id="mHv-ym-tFW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hOt-8s-hSP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1595.6521739130435" y="23.4375"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="MdX-TZ-r0D">
@@ -73,5 +188,6 @@
     </scenes>
     <resources>
         <image name="arrowLocation" width="90" height="90"/>
+        <image name="carPlaceholder" width="350" height="233.5"/>
     </resources>
 </document>
