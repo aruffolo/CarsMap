@@ -17,6 +17,7 @@ protocol CarsMapViewProtocol where Self: UIViewController
 
 class CarsMapViewController: UIViewController
 {
+  @IBOutlet weak var centerButton: UIButton!
   @IBOutlet weak var mapView: MKMapView!
 
   var viewModel: CarsMapViewModelProtocol?
@@ -32,6 +33,17 @@ class CarsMapViewController: UIViewController
   {
     navigationController?.isNavigationBarHidden = true
     mapView.showsUserLocation = true
+
+    centerButton.layer.cornerRadius = centerButton.frame.width / 2
+    setShadow(layer: centerButton.layer)
+  }
+
+  private func setShadow(layer: CALayer)
+  {
+    layer.shadowColor = UIColor.black.cgColor
+    layer.shadowOpacity = 0.4
+    layer.shadowRadius = 4.0
+    layer.shadowOffset = CGSize(width: 1.0, height: 1.0)
   }
 
   private func setMapSettings()
@@ -47,6 +59,11 @@ class CarsMapViewController: UIViewController
   {
     super.viewWillAppear(false)
     viewModel?.viewIsReady()
+  }
+
+  @IBAction func centerButtonTapped(_ sender: UIButton)
+  {
+    viewModel?.ceterButtonTapped()
   }
 }
 

@@ -21,11 +21,24 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Aeu-Xe-EeV">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XaB-uC-H75">
+                                <rect key="frame" x="354" y="802" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="6Br-0m-iZq"/>
+                                    <constraint firstAttribute="height" constant="50" id="sey-bf-vgb"/>
+                                </constraints>
+                                <state key="normal" image="arrowLocation"/>
+                                <connections>
+                                    <action selector="centerButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LgQ-wP-dcY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Aeu-Xe-EeV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="3LV-Fv-dAZ"/>
                             <constraint firstAttribute="trailing" secondItem="Aeu-Xe-EeV" secondAttribute="trailing" id="VmC-MV-dwl"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="XaB-uC-H75" secondAttribute="bottom" constant="10" id="eQx-7j-WLK"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XaB-uC-H75" secondAttribute="trailing" constant="10" id="esO-i3-wvW"/>
                             <constraint firstItem="Aeu-Xe-EeV" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="hPG-MV-PcT"/>
                             <constraint firstAttribute="bottom" secondItem="Aeu-Xe-EeV" secondAttribute="bottom" id="vCr-va-C7J"/>
                         </constraints>
@@ -33,6 +46,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="3rH-K4-fqx"/>
                     <connections>
+                        <outlet property="centerButton" destination="XaB-uC-H75" id="OMy-mz-Mqu"/>
                         <outlet property="mapView" destination="Aeu-Xe-EeV" id="aIW-k7-kQh"/>
                     </connections>
                 </viewController>
@@ -57,4 +71,7 @@
             <point key="canvasLocation" x="-597" y="24"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="arrowLocation" width="90" height="90"/>
+    </resources>
 </document>

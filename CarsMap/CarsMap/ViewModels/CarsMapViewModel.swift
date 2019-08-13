@@ -17,6 +17,7 @@ protocol LocationManagerDelegate: class
 protocol CarsMapViewModelProtocol
 {
   func viewIsReady()
+  func ceterButtonTapped()
 }
 
 class CarsMapViewModel: CarsMapViewModelProtocol
@@ -51,6 +52,11 @@ class CarsMapViewModel: CarsMapViewModelProtocol
         break
       }
     })
+  }
+
+  func ceterButtonTapped()
+  {
+    locationManager.requestLocation()
   }
 }
 
