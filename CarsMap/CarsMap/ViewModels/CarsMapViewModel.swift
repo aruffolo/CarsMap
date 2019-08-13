@@ -22,9 +22,9 @@ protocol CarsMapViewModelProtocol
 class CarsMapViewModel: CarsMapViewModelProtocol
 {
   weak var view: CarsMapViewProtocol?
-  let locationManager: CarsLocationManager
+  let locationManager: CarsLocationManagerProtocol
 
-  init(view: CarsMapViewProtocol?, locationManager: CarsLocationManager)
+  init(view: CarsMapViewProtocol?, locationManager: CarsLocationManagerProtocol)
   {
     self.view = view
     self.locationManager = locationManager

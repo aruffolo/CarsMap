@@ -9,7 +9,13 @@
 import Foundation
 import MapKit
 
-class CarsLocationManager: NSObject
+protocol CarsLocationManagerProtocol
+{
+  func requestAutorization()
+  func requestLocation()
+}
+
+class CarsLocationManager: NSObject, CarsLocationManagerProtocol
 {
   let manager = CLLocationManager()
   weak var delegate: LocationManagerDelegate?

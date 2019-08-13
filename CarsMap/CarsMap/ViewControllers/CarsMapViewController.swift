@@ -36,6 +36,17 @@ class CarsMapViewController: UIViewController
   {
     super.viewWillAppear(false)
     viewModel?.viewIsReady()
+
+    let client = RestClient()
+    client.getCarsList(completion: { result in
+      switch result
+      {
+      case .success(let list):
+        print("list \(list)")
+      case .failure(let error):
+        print("error \(error)")
+      }
+    })
   }
 }
 

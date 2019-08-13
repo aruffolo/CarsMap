@@ -17,6 +17,11 @@
 		0EC4CE832302A12F008BEA7D /* CarsMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4CE822302A12F008BEA7D /* CarsMapViewModel.swift */; };
 		0EC4CE862302AEE6008BEA7D /* CarsLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4CE852302AEE6008BEA7D /* CarsLocationManager.swift */; };
 		0EC4CE882302B188008BEA7D /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4CE872302B188008BEA7D /* AppCoordinator.swift */; };
+		0EC4CE8C2302B845008BEA7D /* RestRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4CE8B2302B845008BEA7D /* RestRouter.swift */; };
+		0EC4CE8E2302B857008BEA7D /* RestConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4CE8D2302B857008BEA7D /* RestConstants.swift */; };
+		0EC4CE902302B865008BEA7D /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4CE8F2302B865008BEA7D /* RestClient.swift */; };
+		0EC4CE932302B881008BEA7D /* JSONDecoder+decodeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4CE922302B881008BEA7D /* JSONDecoder+decodeResponse.swift */; };
+		0EC4CE952302B933008BEA7D /* CarsListResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC4CE942302B933008BEA7D /* CarsListResponse.swift */; };
 		43886F398152D1044845E958 /* Pods_CarsMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 601865AC2F5A3EC4F4F670D2 /* Pods_CarsMap.framework */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +59,11 @@
 		0EC4CE822302A12F008BEA7D /* CarsMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsMapViewModel.swift; sourceTree = "<group>"; };
 		0EC4CE852302AEE6008BEA7D /* CarsLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsLocationManager.swift; sourceTree = "<group>"; };
 		0EC4CE872302B188008BEA7D /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		0EC4CE8B2302B845008BEA7D /* RestRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestRouter.swift; sourceTree = "<group>"; };
+		0EC4CE8D2302B857008BEA7D /* RestConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestConstants.swift; sourceTree = "<group>"; };
+		0EC4CE8F2302B865008BEA7D /* RestClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestClient.swift; sourceTree = "<group>"; };
+		0EC4CE922302B881008BEA7D /* JSONDecoder+decodeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+decodeResponse.swift"; sourceTree = "<group>"; };
+		0EC4CE942302B933008BEA7D /* CarsListResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsListResponse.swift; sourceTree = "<group>"; };
 		236455B51CFE2838AD890777 /* Pods-CarsMap.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CarsMap.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CarsMap/Pods-CarsMap.debug.xcconfig"; sourceTree = "<group>"; };
 		4A535FEFD5AD1E23FD23849C /* Pods-CarsMap.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CarsMap.release.xcconfig"; path = "Pods/Target Support Files/Pods-CarsMap/Pods-CarsMap.release.xcconfig"; sourceTree = "<group>"; };
 		601865AC2F5A3EC4F4F670D2 /* Pods_CarsMap.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CarsMap.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -110,6 +120,8 @@
 		0EC4CE4F2301CA8C008BEA7D /* CarsMap */ = {
 			isa = PBXGroup;
 			children = (
+				0EC4CE912302B86B008BEA7D /* Extensions */,
+				0EC4CE892302B82A008BEA7D /* Servicies */,
 				0EC4CE842302AE9E008BEA7D /* Utils */,
 				0EC4CE812302A107008BEA7D /* ViewModels */,
 				0EC4CE8023029E5A008BEA7D /* ViewControllers */,
@@ -163,6 +175,33 @@
 				0EC4CE852302AEE6008BEA7D /* CarsLocationManager.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		0EC4CE892302B82A008BEA7D /* Servicies */ = {
+			isa = PBXGroup;
+			children = (
+				0EC4CE8A2302B833008BEA7D /* Dto */,
+				0EC4CE8B2302B845008BEA7D /* RestRouter.swift */,
+				0EC4CE8D2302B857008BEA7D /* RestConstants.swift */,
+				0EC4CE8F2302B865008BEA7D /* RestClient.swift */,
+			);
+			path = Servicies;
+			sourceTree = "<group>";
+		};
+		0EC4CE8A2302B833008BEA7D /* Dto */ = {
+			isa = PBXGroup;
+			children = (
+				0EC4CE942302B933008BEA7D /* CarsListResponse.swift */,
+			);
+			path = Dto;
+			sourceTree = "<group>";
+		};
+		0EC4CE912302B86B008BEA7D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				0EC4CE922302B881008BEA7D /* JSONDecoder+decodeResponse.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		79D70644E70A3EB98B69B121 /* Pods */ = {
@@ -354,11 +393,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EC4CE902302B865008BEA7D /* RestClient.swift in Sources */,
 				0EC4CE7F23029E54008BEA7D /* CarsMapViewController.swift in Sources */,
 				0EC4CE862302AEE6008BEA7D /* CarsLocationManager.swift in Sources */,
 				0EC4CE882302B188008BEA7D /* AppCoordinator.swift in Sources */,
 				0EC4CE512301CA8C008BEA7D /* AppDelegate.swift in Sources */,
+				0EC4CE952302B933008BEA7D /* CarsListResponse.swift in Sources */,
+				0EC4CE8C2302B845008BEA7D /* RestRouter.swift in Sources */,
 				0EC4CE832302A12F008BEA7D /* CarsMapViewModel.swift in Sources */,
+				0EC4CE8E2302B857008BEA7D /* RestConstants.swift in Sources */,
+				0EC4CE932302B881008BEA7D /* JSONDecoder+decodeResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
