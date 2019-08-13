@@ -44,17 +44,16 @@ class CarsMapViewModel: CarsMapViewModelProtocol
   {
     locationManager.requestAutorization()
 
-    carsFetcher.getCarsLocationData(completion: { result in
+    carsFetcher.getCarsLocationData(completion: { [weak self] result in
       switch result
       {
       case .success(let list):
-        self.carsLocationViewData = list
-        self.view?.addPoisToMap(carsViewData: list)
+        self?.carsLocationViewData = list
+        self?.view?.addPoisToMap(carsViewData: list)
         let coordinate = (lat: list.first!.lat, lng: list.first!.lng)
-        self.view?.zoomToLocation(coordinate: coordinate)
+        self?.view?.zoomToLocation(coordinate: coordinate)
       case .failure(let error):
-        // TODO: set errors to show
-        break
+        self?.showError(error: error)
       }
     })
   }
@@ -66,17 +65,27 @@ class CarsMapViewModel: CarsMapViewModelProtocol
 
   func goToListTapped()
   {
-    carsFetcher.getCarsListData(completion: { result in
+    carsFetcher.getCarsListData(completion: { [weak self] result in
       switch result
       {
       case .success(let list):
-        self.carsListViewData = list
-        self.view?.goTolist(carsItemData: list)
+        self?.carsListViewData = list
+        self?.view?.goTolist(carsItemData: list)
       case .failure(let error):
-        // TODO: set errors to show
-        break
+        self?.showError(error: error)
       }
     })
+  }
+
+  private func showError(error: CarsFetcherError)
+  {
+    switch error
+    {
+    case .serviceUnavailable:
+      view?.showError(title: AppStrings.error.value, message: AppStrings.serviceUnavailable.value, buttonLabel: AppStrings.close.value)
+    case .emptyList:
+      view?.showError(title: AppStrings.error.value, message: AppStrings.dataNotFound.value, buttonLabel: AppStrings.close.value)
+    }
   }
 
   func zoomToCarLocationView(indexOfCardListItem: Int)

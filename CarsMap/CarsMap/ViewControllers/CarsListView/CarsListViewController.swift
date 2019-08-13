@@ -51,7 +51,9 @@ class CarsListViewController: UIViewController, CarsListViewProtocol
     super.viewDidLoad()
 
     setTableDelegateAndSource()
+
     navigationController?.isNavigationBarHidden = false
+    navigationController?.navigationBar.tintColor = UIColor.purple
 
     setBackButton()
   }
@@ -71,7 +73,7 @@ class CarsListViewController: UIViewController, CarsListViewProtocol
 
   private func setBackButton()
   {
-    let item = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(goBackTapped))
+    let item = UIBarButtonItem(title: AppStrings.back.value, style: .plain, target: self, action: #selector(goBackTapped))
     navigationItem.hidesBackButton = true
     navigationItem.leftBarButtonItem = item
   }

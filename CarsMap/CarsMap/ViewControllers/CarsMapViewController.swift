@@ -14,6 +14,7 @@ protocol CarsMapViewProtocol where Self: UIViewController
   func zoomToLocation(coordinate: (lat: Double, lng: Double))
   func addPoisToMap(carsViewData: [CarLocationViewData])
   func goTolist(carsItemData: [CarListItemDataView])
+  func showError(title: String, message: String, buttonLabel: String)
 }
 
 class CarsMapViewController: UIViewController
@@ -124,5 +125,14 @@ extension CarsMapViewController: CarsMapViewProtocol
       self.mapView.removeAnnotations(self.mapView.annotations)
       self.mapView.addAnnotations(annotations)
     }
+  }
+  
+  func showError(title: String, message: String, buttonLabel: String)
+  {
+    let alertController = UIAlertController(title: title, message:
+      message, preferredStyle: UIAlertController.Style.alert)
+    alertController.addAction(UIAlertAction(title: buttonLabel, style: UIAlertAction.Style.default, handler: nil))
+
+    self.present(alertController, animated: true, completion: nil)
   }
 }
