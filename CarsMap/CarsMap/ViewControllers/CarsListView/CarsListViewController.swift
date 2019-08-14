@@ -29,6 +29,7 @@ class CarsListViewController: UIViewController, CarsListViewProtocol
 
   var itemDataView: [CarListItemDataView] = []
   var dataSource: CarsListDataSource!
+  // swiftlint:disable weak_delegate
   var tableDelegate: CarListDelegate!
   var viewModel: CarsListViewModelProtocol!
 

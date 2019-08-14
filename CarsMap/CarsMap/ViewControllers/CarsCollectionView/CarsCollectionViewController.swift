@@ -21,6 +21,7 @@ class CarsCollectionViewController: UIViewController, CardCollectionProtocol
 
   var itemTappedAtIndex: ((Int) -> Void)?
   var dataSource: CardCollectionViewSource?
+  // swiftlint:disable weak_delegate
   var collectionFlowDelegate: CardCollectionViewDelegate?
 
   static func initViewController() -> CarsCollectionViewController

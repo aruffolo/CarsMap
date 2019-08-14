@@ -27,7 +27,8 @@ class CarsMapViewController: UIViewController
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var carsListButton: UIButton!
   @IBOutlet weak var containerView: UIView!
-  
+
+  // swiftlint:disable weak_delegate
   var mapViewDelegate: CarsMapViewDelegate!
 
   var goToListClosure: ((_ carsItemData: [CarListItemDataView]) -> Void)?

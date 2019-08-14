@@ -83,7 +83,7 @@ struct Constants
                         modelName: "Ferrari Enzo",
                         transmission: "manual",
                         fuelType: .gasoline,
-                        dataId: "c"),
+                        dataId: "c")
   ]
 
 }
