@@ -20,6 +20,7 @@ protocol CarsMapViewModelProtocol
   func ceterButtonTapped()
   func goToListTapped()
   func zoomToCarLocationView(indexOfCardListItem: Int)
+  func annotationTapped(carId: String)
 }
 
 class CarsMapViewModel: CarsMapViewModelProtocol
@@ -56,6 +57,10 @@ class CarsMapViewModel: CarsMapViewModelProtocol
         self?.showError(error: error)
       }
     })
+
+    getCarListData(completion: { [weak self] list in
+      self?.view?.fillCollectionView(carsItemData: list)
+    })
   }
 
   func ceterButtonTapped()
@@ -65,12 +70,19 @@ class CarsMapViewModel: CarsMapViewModelProtocol
 
   func goToListTapped()
   {
+    getCarListData(completion: { [weak self] list in
+      self?.view?.goTolist(carsItemData: list)
+    })
+  }
+
+  private func getCarListData(completion: @escaping ((_ itemList: [CarListItemDataView]) -> Void))
+  {
     carsFetcher.getCarsListData(completion: { [weak self] result in
       switch result
       {
       case .success(let list):
         self?.carsListViewData = list
-        self?.view?.goTolist(carsItemData: list)
+        completion(list)
       case .failure(let error):
         self?.showError(error: error)
       }
@@ -102,6 +114,15 @@ class CarsMapViewModel: CarsMapViewModelProtocol
     {
       self.view?.zoomToLocation(coordinate: (lat: data.lat, lng: data.lng))
     }
+  }
+
+  func annotationTapped(carId: String)
+  {
+    let dataLocation = carsLocationViewData?.first(where: {
+      $0.dataId == carId
+    })
+
+    //TODO: ask the view to show the detail in the collection view
   }
 }
 

@@ -9,9 +9,9 @@
 import UIKit
 import SDWebImage
 
-protocol ReloadTable: class
+protocol ReloadItems: class
 {
-  func reloadTable()
+  func reloadItems()
 }
 
 protocol CarsListViewProtocol where Self: UIViewController
@@ -73,7 +73,10 @@ class CarsListViewController: UIViewController, CarsListViewProtocol
 
   private func setBackButton()
   {
-    let item = UIBarButtonItem(title: AppStrings.back.value, style: .plain, target: self, action: #selector(goBackTapped))
+    let item = UIBarButtonItem(title: AppStrings.back.value,
+                               style: .plain,
+                               target: self,
+                               action: #selector(goBackTapped))
     navigationItem.hidesBackButton = true
     navigationItem.leftBarButtonItem = item
   }
@@ -105,9 +108,9 @@ class CarsListViewController: UIViewController, CarsListViewProtocol
   }
 }
 
-extension CarsListViewController: ReloadTable
+extension CarsListViewController: ReloadItems
 {
-  func reloadTable()
+  func reloadItems()
   {
     tableView.reloadData()
   }
@@ -115,15 +118,15 @@ extension CarsListViewController: ReloadTable
 
 class CarsListDataSource: NSObject, UITableViewDataSource
 {
-  weak var reloadTable: ReloadTable?
+  weak var reloadTable: ReloadItems?
 
   var itemDataView: [CarListItemDataView]? {
     didSet {
-      reloadTable?.reloadTable()
+      reloadTable?.reloadItems()
     }
   }
 
-  init(reloadTable: ReloadTable)
+  init(reloadTable: ReloadItems)
   {
     self.reloadTable = reloadTable
   }
@@ -140,7 +143,8 @@ class CarsListDataSource: NSObject, UITableViewDataSource
         fatalError("cell must be present CarsListTableViewCell")
     }
 
-    if let item = itemDataView?[indexPath.row] {
+    if let item = itemDataView?[indexPath.row]
+    {
       cell.carmodelNameLabel.text = item.modelName
       cell.carTransmissionLabel.text = item.transmission
       cell.fuelTypeLabel.text = item.fuelType.rawValue

@@ -12,10 +12,12 @@ final class CarMapAnnotation: NSObject, MKAnnotation
 {
   let coordinate: CLLocationCoordinate2D
   let imageName: String
+  let carId: String
 
-  init(coordinate: CLLocationCoordinate2D)
+  init(coordinate: CLLocationCoordinate2D, carId: String)
   {
     self.coordinate = coordinate
+    self.carId = carId
     imageName = "carIcon"
   }
 }

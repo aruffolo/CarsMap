@@ -15,23 +15,31 @@ protocol CarsMapViewProtocol where Self: UIViewController
   func addPoisToMap(carsViewData: [CarLocationViewData])
   func goTolist(carsItemData: [CarListItemDataView])
   func showError(title: String, message: String, buttonLabel: String)
+  func fillCollectionView(carsItemData: [CarListItemDataView])
 }
 
 class CarsMapViewController: UIViewController
 {
+  @IBOutlet weak var shadowView: UIView!
   @IBOutlet weak var centerButton: UIButton!
   @IBOutlet weak var mapView: MKMapView!
   @IBOutlet weak var carsListButton: UIButton!
+  @IBOutlet weak var containerView: UIView!
+  
+  var mapViewDelegate: CarsMapViewDelegate!
 
   var goToListClosure: ((_ carsItemData: [CarListItemDataView]) -> Void)?
 
   var viewModel: CarsMapViewModelProtocol?
+  var strongCollectionViewController: CardCollectionProtocol?
+  weak var collectionViewController: CardCollectionProtocol?
 
   override func viewDidLoad()
   {
     super.viewDidLoad()
     setStyle()
     setMapSettings()
+    addCollectionViewController()
   }
 
   private func setStyle()
@@ -44,6 +52,7 @@ class CarsMapViewController: UIViewController
 
     carsListButton.layer.cornerRadius = 5
     setShadow(layer: carsListButton.layer)
+    setShadow(layer: shadowView.layer)
   }
 
   private func setShadow(layer: CALayer)
@@ -61,6 +70,15 @@ class CarsMapViewController: UIViewController
 
     mapView.register(CarClusterAnnotationView.self,
                      forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
+
+    mapViewDelegate = CarsMapViewDelegate()
+    mapViewDelegate.didSelectId = { [weak self] carId in
+
+      // TODO: call the function for the collection view
+      self?.viewModel?.annotationTapped(carId: carId)
+    }
+
+    mapView.delegate = mapViewDelegate
   }
 
   override func viewWillAppear(_ animated: Bool)
@@ -94,6 +112,25 @@ class CarsMapViewController: UIViewController
   {
     goToListClosure?(carsItemData)
   }
+
+  func fillCollectionView(carsItemData: [CarListItemDataView])
+  {
+    collectionViewController?.updateCarsData(itemDataView: carsItemData)
+  }
+
+  private func addCollectionViewController()
+  {
+    if let collectionViewController = self.strongCollectionViewController
+    {
+      self.collectionViewController = collectionViewController
+      self.addChild(collectionViewController)
+      collectionViewController.view.frame = self.containerView.bounds
+      self.containerView.addSubview(collectionViewController.view)
+      collectionViewController.didMove(toParent: self)
+
+      strongCollectionViewController = nil
+    }
+  }
 }
 
 extension CarsMapViewController: CarsMapViewProtocol
@@ -117,7 +154,8 @@ extension CarsMapViewController: CarsMapViewProtocol
   func addPoisToMap(carsViewData: [CarLocationViewData])
   {
     let annotations = carsViewData.map { (data: CarLocationViewData) -> CarMapAnnotation in
-      let annotation = CarMapAnnotation(coordinate: CLLocationCoordinate2D(latitude: data.lat, longitude: data.lng))
+      let annotation = CarMapAnnotation(coordinate: CLLocationCoordinate2D(latitude: data.lat, longitude: data.lng),
+                                        carId: data.dataId)
       return annotation
     }
 
@@ -134,5 +172,18 @@ extension CarsMapViewController: CarsMapViewProtocol
     alertController.addAction(UIAlertAction(title: buttonLabel, style: UIAlertAction.Style.default, handler: nil))
 
     self.present(alertController, animated: true, completion: nil)
+  }
+}
+
+class CarsMapViewDelegate: NSObject, MKMapViewDelegate
+{
+  var didSelectId: ((_ index: String) -> Void)?
+
+  func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView)
+  {
+    if let annotation = view.annotation as? CarMapAnnotation
+    {
+      didSelectId?(annotation.carId)
+    }
   }
 }
