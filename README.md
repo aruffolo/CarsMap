@@ -6,7 +6,7 @@ CarsMap is an example app that shows cars located on a map using the cluster API
 MVVM-C is the architecture choosen for this app. The 'C' means Coordinator, an object that is responsible for navigating through screens and dependency injection.
 
 Separation of concern is quite strict, REST servicies are completely separated from the ViewModel. Almost everything is injected using a protocol, this allows testability of each component in isolation.
-Unit Test coverage is at 72% (is a small app), and a single UITest is also present.
+Unit Test coverage is at 80% (is a small app), and a single UITest is also present.
 Swift 5 and Alamofire 5 beta are used. Alamofire is a widley used framework to handle http methods, and makes good use of Swift style of code. Alamofire inclused the Router pattern which is the one used in this app.
 
 ## Linting
