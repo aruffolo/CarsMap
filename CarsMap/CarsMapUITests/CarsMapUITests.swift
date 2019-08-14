@@ -23,9 +23,9 @@ class CarsMapUITests: XCTestCase
   // Test added only for example
   func testExample()
   {
-    app.buttons["CARS LIST"].tap()
+    app.buttons["SHOW CARS LIST"].tap()
     app.navigationBars["CarsMap.CarsListView"].buttons["Back"].tap()
 
-    XCTAssert(app.buttons["CARS LIST"].exists)
+    XCTAssert(app.buttons["SHOW CARS LIST"].exists)
   }
 }

@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -33,11 +32,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nQE-fs-iAq">
-                                <rect key="frame" x="20" y="574" width="84" height="28"/>
+                                <rect key="frame" x="20" y="574" width="134" height="28"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="contentEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
-                                <state key="normal" title="CARS LIST">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="SHOW CARS LIST">
+                                    <color key="titleColor" red="0.49803921569999998" green="0.058823529409999999" blue="0.4941176471" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="carsListButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gKv-s6-lEJ"/>
@@ -327,6 +326,7 @@
                             <constraint firstItem="k0V-yK-FWo" firstAttribute="top" secondItem="vtP-wE-GXH" secondAttribute="top" id="LEP-CF-QDR"/>
                             <constraint firstAttribute="bottom" secondItem="k0V-yK-FWo" secondAttribute="bottom" id="PJa-mR-rbW"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="Nmz-6q-lDI"/>
                     </view>
                     <size key="freeformSize" width="414" height="250"/>
                     <connections>
