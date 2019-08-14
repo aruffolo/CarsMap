@@ -95,4 +95,22 @@ class CarsMapTests: XCTestCase
 
     XCTAssert(viewController.coordinate != nil)
   }
+
+  func testCarListBackViewModel()
+  {
+    let viewController = CarListMockViewController()
+    let viewModel = CarsListViewModel(view: viewController)
+
+    viewModel.goBackTapped()
+    XCTAssert(viewController.indexTapped == nil)
+  }
+
+  func testCarListTappedViewModel()
+  {
+    let viewController = CarListMockViewController()
+    let viewModel = CarsListViewModel(view: viewController)
+
+    viewModel.didTapElementAt(index: 0)
+    XCTAssert(viewController.indexTapped == 0)
+  }
 }

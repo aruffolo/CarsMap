@@ -34,6 +34,9 @@
 		0EEC356423040EF4000AE9D2 /* CarsMapMockController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEC356323040EF4000AE9D2 /* CarsMapMockController.swift */; };
 		0EEC356623040FF5000AE9D2 /* CarsListFetcherMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEC356523040FF5000AE9D2 /* CarsListFetcherMock.swift */; };
 		0EEC3568230410ED000AE9D2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEC3567230410ED000AE9D2 /* Constants.swift */; };
+		0EEC356A23041EAF000AE9D2 /* CarListMockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEC356923041EAF000AE9D2 /* CarListMockViewController.swift */; };
+		0EEC356C2304200A000AE9D2 /* RestClientMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEC356B2304200A000AE9D2 /* RestClientMock.swift */; };
+		0EEC356E23042133000AE9D2 /* CarsMapServiciesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EEC356D23042133000AE9D2 /* CarsMapServiciesTests.swift */; };
 		0EF68E3F23036F4C00C540A1 /* AppMessages.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0EF68E3E23036F4C00C540A1 /* AppMessages.strings */; };
 		0EF68E4223036FAF00C540A1 /* AppStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF68E4123036FAF00C540A1 /* AppStrings.swift */; };
 		0EF68E442303808C00C540A1 /* CarsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EF68E432303808C00C540A1 /* CarsCollectionViewController.swift */; };
@@ -92,6 +95,9 @@
 		0EEC356323040EF4000AE9D2 /* CarsMapMockController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsMapMockController.swift; sourceTree = "<group>"; };
 		0EEC356523040FF5000AE9D2 /* CarsListFetcherMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsListFetcherMock.swift; sourceTree = "<group>"; };
 		0EEC3567230410ED000AE9D2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0EEC356923041EAF000AE9D2 /* CarListMockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarListMockViewController.swift; sourceTree = "<group>"; };
+		0EEC356B2304200A000AE9D2 /* RestClientMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestClientMock.swift; sourceTree = "<group>"; };
+		0EEC356D23042133000AE9D2 /* CarsMapServiciesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsMapServiciesTests.swift; sourceTree = "<group>"; };
 		0EF68E3E23036F4C00C540A1 /* AppMessages.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = AppMessages.strings; sourceTree = "<group>"; };
 		0EF68E4123036FAF00C540A1 /* AppStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStrings.swift; sourceTree = "<group>"; };
 		0EF68E432303808C00C540A1 /* CarsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarsCollectionViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +181,7 @@
 			children = (
 				0EEC356223040EAA000AE9D2 /* Mocks */,
 				0EC4CE652301CA8E008BEA7D /* CarsMapTests.swift */,
+				0EEC356D23042133000AE9D2 /* CarsMapServiciesTests.swift */,
 				0EC4CE672301CA8E008BEA7D /* Info.plist */,
 			);
 			path = CarsMapTests;
@@ -271,6 +278,8 @@
 				0EEC356323040EF4000AE9D2 /* CarsMapMockController.swift */,
 				0EEC356523040FF5000AE9D2 /* CarsListFetcherMock.swift */,
 				0EEC3567230410ED000AE9D2 /* Constants.swift */,
+				0EEC356923041EAF000AE9D2 /* CarListMockViewController.swift */,
+				0EEC356B2304200A000AE9D2 /* RestClientMock.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -535,9 +544,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0EEC356C2304200A000AE9D2 /* RestClientMock.swift in Sources */,
 				0EC4CE662301CA8E008BEA7D /* CarsMapTests.swift in Sources */,
 				0EEC356623040FF5000AE9D2 /* CarsListFetcherMock.swift in Sources */,
 				0EEC356423040EF4000AE9D2 /* CarsMapMockController.swift in Sources */,
+				0EEC356E23042133000AE9D2 /* CarsMapServiciesTests.swift in Sources */,
+				0EEC356A23041EAF000AE9D2 /* CarListMockViewController.swift in Sources */,
 				0EEC3568230410ED000AE9D2 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
