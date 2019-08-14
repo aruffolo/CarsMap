@@ -34,7 +34,7 @@ enum FuelType: String, Codable
 {
   case diesel = "D"
   case electrical = "E"
-  case petrol = "P"
+  case gasoline = "P"
 }
 
 enum InnerCleanliness: String, Codable

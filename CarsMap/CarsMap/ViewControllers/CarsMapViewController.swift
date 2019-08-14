@@ -14,7 +14,7 @@ protocol CarsMapViewProtocol where Self: UIViewController
   func zoomToLocation(coordinate: (lat: Double, lng: Double))
   func addPoisToMap(carsViewData: [CarLocationViewData])
   func goTolist(carsItemData: [CarListItemDataView])
-  func showError(title: String, message: String, buttonLabel: String)
+  func showErrorForDataFailure(title: String, message: String, buttonLabel: String)
   func fillCollectionView(carsItemData: [CarListItemDataView])
   func scrollCollectionTo(index: Int)
 }
@@ -109,16 +109,6 @@ class CarsMapViewController: UIViewController
     viewModel?.goToListTapped()
   }
 
-  func goTolist(carsItemData: [CarListItemDataView])
-  {
-    goToListClosure?(carsItemData)
-  }
-
-  func fillCollectionView(carsItemData: [CarListItemDataView])
-  {
-    collectionViewController?.updateCarsData(itemDataView: carsItemData)
-  }
-
   private func addCollectionViewController()
   {
     if let collectionViewController = self.strongCollectionViewController
@@ -131,11 +121,6 @@ class CarsMapViewController: UIViewController
 
       strongCollectionViewController = nil
     }
-  }
-
-  func scrollCollectionTo(index: Int)
-  {
-    collectionViewController?.scrollToItemAt(index: index)
   }
 }
 
@@ -171,13 +156,32 @@ extension CarsMapViewController: CarsMapViewProtocol
     }
   }
   
-  func showError(title: String, message: String, buttonLabel: String)
+  func showErrorForDataFailure(title: String, message: String, buttonLabel: String)
   {
     let alertController = UIAlertController(title: title, message:
       message, preferredStyle: UIAlertController.Style.alert)
-    alertController.addAction(UIAlertAction(title: buttonLabel, style: UIAlertAction.Style.default, handler: nil))
+
+    alertController.addAction(UIAlertAction(title: buttonLabel,
+                                            style: UIAlertAction.Style.default, handler: { [weak self] _ in
+                                              self?.viewModel?.loadData()
+    }))
 
     self.present(alertController, animated: true, completion: nil)
+  }
+
+  func goTolist(carsItemData: [CarListItemDataView])
+  {
+    goToListClosure?(carsItemData)
+  }
+
+  func fillCollectionView(carsItemData: [CarListItemDataView])
+  {
+    collectionViewController?.updateCarsData(itemDataView: carsItemData)
+  }
+
+  func scrollCollectionTo(index: Int)
+  {
+    collectionViewController?.scrollToItemAt(index: index)
   }
 }
 

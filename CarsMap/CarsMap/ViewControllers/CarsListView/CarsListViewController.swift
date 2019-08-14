@@ -22,7 +22,6 @@ protocol CarsListViewProtocol where Self: UIViewController
 
 class CarsListViewController: UIViewController, CarsListViewProtocol
 {
-
   @IBOutlet weak var tableView: UITableView!
 
   var closeClosure: (() -> Void)?

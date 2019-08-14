@@ -128,12 +128,14 @@ struct CarsListFetcher: CarsListFetcherProtocol
       return .diesel
     case .electrical:
       return .electrical
-    case .petrol:
+    case .gasoline:
       return .gasoline
     }
   }
 
-  private func removeDuplicateKeys<Element: DataId>(carList: [Element]) -> [Element] {
+  // The service should give me unique keys but it's alway better to check what arrives
+  private func removeDuplicateKeys<Element: DataId>(carList: [Element]) -> [Element]
+  {
     var addedDict = [String: Bool]()
     return carList.filter {
       addedDict.updateValue(true, forKey: $0.dataId) == nil

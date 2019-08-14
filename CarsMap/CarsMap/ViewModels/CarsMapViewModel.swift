@@ -21,6 +21,7 @@ protocol CarsMapViewModelProtocol
   func goToListTapped()
   func zoomToCarLocationView(indexOfCardListItem: Int)
   func annotationTapped(carId: String)
+  func loadData()
 }
 
 class CarsMapViewModel: CarsMapViewModelProtocol
@@ -44,7 +45,11 @@ class CarsMapViewModel: CarsMapViewModelProtocol
   func viewIsReady()
   {
     locationManager.requestAutorization()
+    loadData()
+  }
 
+  func loadData()
+  {
     carsFetcher.getCarsLocationData(completion: { [weak self] result in
       switch result
       {
@@ -94,13 +99,13 @@ class CarsMapViewModel: CarsMapViewModelProtocol
     switch error
     {
     case .serviceUnavailable:
-      view?.showError(title: AppStrings.error.value,
+      view?.showErrorForDataFailure(title: AppStrings.error.value,
                       message: AppStrings.serviceUnavailable.value,
-                      buttonLabel: AppStrings.close.value)
+                      buttonLabel: AppStrings.retry.value)
     case .emptyList:
-      view?.showError(title: AppStrings.error.value,
+      view?.showErrorForDataFailure(title: AppStrings.error.value,
                       message: AppStrings.dataNotFound.value,
-                      buttonLabel: AppStrings.close.value)
+                      buttonLabel: AppStrings.retry.value)
     }
   }
 

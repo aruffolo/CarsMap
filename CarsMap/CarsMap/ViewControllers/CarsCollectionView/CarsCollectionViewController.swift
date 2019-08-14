@@ -84,7 +84,8 @@ class CardCollectionViewSource: NSObject, UICollectionViewDataSource
     }
   }
 
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+  {
     return itemDataView?.count ?? 0
   }
 
