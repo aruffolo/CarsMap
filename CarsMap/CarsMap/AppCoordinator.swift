@@ -37,6 +37,11 @@ class AppCoordinator
       self?.goToCarListViewController(carListItems: dataList)
     }
 
+    setCarsCollectionView()
+  }
+
+  private func setCarsCollectionView()
+  {
     let collectionController = CarsCollectionViewController.initViewController()
     // I want to keep the reference until the view controller is added to the view, this is why I need it to be
     // strong
@@ -47,7 +52,7 @@ class AppCoordinator
   private func configureCollectionController(collectionController: CarsCollectionViewController)
   {
     collectionController.itemTappedAtIndex = { [weak self] index in
-      // TODO: call function in map controller
+      self?.mapController?.elementHasBeenTappedAt(index: index)
     }
   }
 

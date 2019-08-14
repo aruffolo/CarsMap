@@ -12,6 +12,7 @@ protocol CardCollectionProtocol where Self: UIViewController
 {
   var itemTappedAtIndex:((_ index: Int) -> Void)? { get set }
   func updateCarsData(itemDataView: [CarListItemDataView])
+  func scrollToItemAt(index: Int)
 }
 
 class CarsCollectionViewController: UIViewController, CardCollectionProtocol
@@ -47,12 +48,21 @@ class CarsCollectionViewController: UIViewController, CardCollectionProtocol
 
     collectionFlowDelegate = CardCollectionViewDelegate()
     collectionView.delegate = collectionFlowDelegate
+
+    collectionFlowDelegate?.itemTappedAtIndex = { [weak self] index in
+      self?.itemTappedAtIndex?(index)
+    }
   }
 
   func updateCarsData(itemDataView: [CarListItemDataView])
   {
     dataSource?.itemDataView = itemDataView
     collectionFlowDelegate?.itemDataView = itemDataView
+  }
+
+  func scrollToItemAt(index: Int)
+  {
+    collectionView.scrollToItem(at: IndexPath(item: index, section: 0), at: .centeredHorizontally, animated: true)
   }
 }
 
@@ -102,11 +112,13 @@ class CardCollectionViewDelegate: NSObject, UICollectionViewDelegateFlowLayout
   let horizontalMargin: CGFloat = 0
   let itemSpacing: CGFloat = 20
   let itemHeight: CGFloat = 250
-  let itemWidth: CGFloat = 414
+  let itemWidth: CGFloat = 380
+
+  var itemTappedAtIndex: ((Int) -> Void)?
 
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
   {
-    // TODO
+    itemTappedAtIndex?(indexPath.row)
   }
 
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,

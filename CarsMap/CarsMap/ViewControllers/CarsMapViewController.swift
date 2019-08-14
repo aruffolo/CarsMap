@@ -16,6 +16,7 @@ protocol CarsMapViewProtocol where Self: UIViewController
   func goTolist(carsItemData: [CarListItemDataView])
   func showError(title: String, message: String, buttonLabel: String)
   func fillCollectionView(carsItemData: [CarListItemDataView])
+  func scrollCollectionTo(index: Int)
 }
 
 class CarsMapViewController: UIViewController
@@ -130,6 +131,11 @@ class CarsMapViewController: UIViewController
 
       strongCollectionViewController = nil
     }
+  }
+
+  func scrollCollectionTo(index: Int)
+  {
+    collectionViewController?.scrollToItemAt(index: index)
   }
 }
 

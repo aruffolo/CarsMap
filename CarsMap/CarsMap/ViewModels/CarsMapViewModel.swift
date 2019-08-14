@@ -118,11 +118,14 @@ class CarsMapViewModel: CarsMapViewModelProtocol
 
   func annotationTapped(carId: String)
   {
-    let dataLocation = carsLocationViewData?.first(where: {
+    let dataIndex = carsLocationViewData?.firstIndex(where: {
       $0.dataId == carId
     })
 
-    //TODO: ask the view to show the detail in the collection view
+    if let index = dataIndex
+    {
+      view?.scrollCollectionTo(index: index)
+    }
   }
 }
 
