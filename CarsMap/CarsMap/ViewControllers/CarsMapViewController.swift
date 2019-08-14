@@ -41,6 +41,8 @@ class CarsMapViewController: UIViewController
     setStyle()
     setMapSettings()
     addCollectionViewController()
+    
+    viewModel?.viewIsReady()
   }
 
   private func setStyle()
@@ -75,7 +77,6 @@ class CarsMapViewController: UIViewController
     mapViewDelegate = CarsMapViewDelegate()
     mapViewDelegate.didSelectId = { [weak self] carId in
 
-      // TODO: call the function for the collection view
       self?.viewModel?.annotationTapped(carId: carId)
     }
 
@@ -85,7 +86,6 @@ class CarsMapViewController: UIViewController
   override func viewWillAppear(_ animated: Bool)
   {
     super.viewWillAppear(false)
-    viewModel?.viewIsReady()
     navigationController?.isNavigationBarHidden = true
   }
 

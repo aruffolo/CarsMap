@@ -68,7 +68,7 @@ struct CarsListFetcher: CarsListFetcherProtocol
       return CarLocationViewData(lat: lat, lng: lng, name: name, dataId: dataId)
     }
 
-    return removeDuplicateKeys(carList: dataList)
+    return removeDuplicateKeys(carList: dataList).sorted(by: { $0.dataId < $1.dataId })
   }
 
   func getCarsListData(completion: @escaping (_ result: Result<[CarListItemDataView], CarsFetcherError>) -> Void)
@@ -117,7 +117,7 @@ struct CarsListFetcher: CarsListFetcherProtocol
                                  fuelType: fuelTypeViewData, dataId: dataId)
     }
 
-    return removeDuplicateKeys(carList: carDataList)
+    return removeDuplicateKeys(carList: carDataList).sorted(by: { $0.dataId < $1.dataId })
   }
 
   private func createFuelDescription(fuelType: FuelType) -> FuelTypeViewData

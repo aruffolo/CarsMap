@@ -43,12 +43,6 @@
                                     <action selector="carsListButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gKv-s6-lEJ"/>
                                 </connections>
                             </button>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="65m-AD-HnN">
-                                <rect key="frame" x="0.0" y="612" width="414" height="250"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="Sad-4q-BFE"/>
-                                </constraints>
-                            </containerView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xyv-j1-0HX">
                                 <rect key="frame" x="0.0" y="612" width="414" height="1"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -56,6 +50,12 @@
                                     <constraint firstAttribute="height" constant="1" id="fxC-6S-8k5"/>
                                 </constraints>
                             </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="65m-AD-HnN">
+                                <rect key="frame" x="0.0" y="612" width="414" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="Sad-4q-BFE"/>
+                                </constraints>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
