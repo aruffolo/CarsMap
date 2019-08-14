@@ -144,6 +144,8 @@ extension CarsMapViewModel: LocationManagerDelegate
 
   func didFail()
   {
-    // show error
+    view?.showError(title: AppStrings.error.value,
+                    message: AppStrings.locationNotFound.value,
+                    buttonLabel: AppStrings.close.value)
   }
 }

@@ -16,6 +16,7 @@ enum AppStrings: String
   case dataNotFound = "data_not_found"
   case back = "back"
   case retry = "retry"
+  case locationNotFound = "location_not_found"
 
   var value: String {
     let v = NSLocalizedString(self.rawValue, tableName: "AppMessages", comment: "")

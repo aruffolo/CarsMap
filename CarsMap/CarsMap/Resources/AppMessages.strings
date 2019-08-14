@@ -12,3 +12,4 @@
 "close" = "Close";
 "back" = "Back";
 "retry" = "Retry";
+"location_not_found" = "Could not found you location";

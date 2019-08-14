@@ -15,6 +15,7 @@ protocol CarsMapViewProtocol where Self: UIViewController
   func addPoisToMap(carsViewData: [CarLocationViewData])
   func goTolist(carsItemData: [CarListItemDataView])
   func showErrorForDataFailure(title: String, message: String, buttonLabel: String)
+  func showError(title: String, message: String, buttonLabel: String)
   func fillCollectionView(carsItemData: [CarListItemDataView])
   func scrollCollectionTo(index: Int)
 }
@@ -165,6 +166,15 @@ extension CarsMapViewController: CarsMapViewProtocol
                                             style: UIAlertAction.Style.default, handler: { [weak self] _ in
                                               self?.viewModel?.loadData()
     }))
+
+    self.present(alertController, animated: true, completion: nil)
+  }
+
+  func showError(title: String, message: String, buttonLabel: String)
+  {
+    let alertController = UIAlertController(title: title, message:
+      message, preferredStyle: UIAlertController.Style.alert)
+    alertController.addAction(UIAlertAction(title: buttonLabel, style: UIAlertAction.Style.default, handler: nil))
 
     self.present(alertController, animated: true, completion: nil)
   }

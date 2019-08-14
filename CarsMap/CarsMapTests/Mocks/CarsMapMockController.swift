@@ -11,6 +11,7 @@ import UIKit
 
 class CarsMapMockController: UIViewController, CarsMapViewProtocol
 {
+
   var coordinate: (lat: Double, lng: Double)?
   var carsViewData: [CarLocationViewData]?
   var carsItemData: [CarListItemDataView]?
@@ -45,11 +46,16 @@ class CarsMapMockController: UIViewController, CarsMapViewProtocol
 
   func fillCollectionView(carsItemData: [CarListItemDataView])
   {
-
+    // nothing to do here
   }
 
   func scrollCollectionTo(index: Int)
   {
     self.scrollIndex = index
+  }
+
+  func showError(title: String, message: String, buttonLabel: String)
+  {
+    // nothing to do here
   }
 }
